@@ -22,7 +22,10 @@ public class Example_2{
 		
 		System.out.println("letter\tCount");
 		for(int i = 0; i < counts.length; i++){
-			System.out.println( (char)(i+'a') +"\t"+counts[i]);
+			if(counts[i]>0){
+				System.out.println( (char)(i+'a') +":\t"+counts[i]);
+			}
+			
 		}
 		
 	}
