@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 abstract class AbstractProduct{
@@ -143,7 +144,7 @@ class Customer{
 		return new Order(this, cart, transaction);	
 	}
 	
-	private Transaction makePayment(){
+	private Transaction makePayment(ShoppingCart cart){
 		//making payment with credit card
 		//for simplicity, ignoring the credit application here
 		
@@ -160,5 +161,54 @@ class CreditCard{
 		this.number = number;
 		this.cvv = cvv;
 		this.validThrough = validThrough;
+	}
+}
+
+class Transaction {
+	private final UUID transactionId;
+	private final int value;
+	private final LocalDateTime creationTime;
+	
+	public Transaction(UUID transactionId, int value){
+		this.transactionId = transactionId;
+		this.value = value;
+		this.creationTime = LocalDateTime.now();
+	}
+	
+	@Override
+	public String toString(){
+		return "transactionId="+transactionId + ", value=" +value+", creationTime=" + creationTime;
+	}
+}
+
+class Order{
+	private final Customer customer;
+	private final ShoppingCart shoppingCart;
+	private final Transaction transaction;
+	
+	public Order(Customer customer, ShoppingCart shoppingCart, Transaction transaction){
+		this.customer = customer;
+		this.shoppingCart = shoppingCart;
+		this.transaction = transaction;
+	}
+	
+	public Customer getCustomer(){
+		return customer;
+	}
+	
+	public ShoppingCart getShoppingCart(){
+		return shoppingCart;
+	}
+	
+	public Transaction getTransaction(){
+		return transaction;
+	}
+	
+	@Override
+	public String toString(){
+		return "Order{" +"\n customer="+ customer+
+				"\n cart="+shoppingCart +
+				"\n payment="+ transaction +
+				"\n}";
 	}
 }
