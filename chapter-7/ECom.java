@@ -212,3 +212,33 @@ class Order{
 				"\n}";
 	}
 }
+
+public class ECom{
+	public static void main(String[] args){
+		ShoppingCart shoppingCart = new ShoppingCart();
+		NonDigitalProduct keyboard = new NonDigitalProduct("Mechanical Gaming Keyboard", 48, 10, 450, new Dimension(1,10,2));
+		NonDigitalProduct mouse = new NonDigitalProduct("Gaming Mouse", 48, 15, 100, new Dimension(1,1,2));
+		NonDigitalProduct ecoDot = new NonDigitalProduct("Eco Dot(4th Generation)", 40, 12, 150, new Dimension(1,2,2));
+		
+		shoppingCart.addProduct(keyboard);
+		shoppingCart.addProduct(mouse);
+		shoppingCart.addProduct(ecoDot);
+		
+		DigitalProduct javaProgrammingEbook = new DigitalProduct("Java Programming",750, 15);
+		DigitalProduct advanceJavaProgrammingEbook = new DigitalProduct("Advance Java Programming",750, 15, "JAVA25");
+		
+		shoppingCart.addProduct(javaProgrammingEbook);
+		shoppingCart.addProduct(advanceJavaProgrammingEbook);
+		
+		System.out.println("shoppingCart = "+shoppingCart);
+		int totalPrice = shoppingCart.getTotalPrice();
+		System.out.println("totalPrice = "+ totalPrice);
+		
+		Customer customer = new Customer("Moasharraf", new CreditCard(3434343434L, 234, "03/27"));
+		
+		Order order = customer.checkout(shoppingCart);
+		
+		System.out.println(order);
+		
+	}
+}
