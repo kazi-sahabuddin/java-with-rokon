@@ -18,17 +18,44 @@ class Client{
 	}
 }
 
+/*
 class PayCalculator{
 	private static final double HOURLY_RATE = 70;
+	private static final double FIXED_PAY = 550;
 	
+	public double getPay(Client client, String method){
+	
+		return switch(method){
+			case "HOURLY" -> client.getHoursWorked() * HOURLY_RATE;
+			case "FIXED" -> FIXED_PAY;
+			default -> throw new IllegalArgumentException( "Unknown method: "+ method );
+		};
+	}
+}*/
+
+abstract class PayCalculator {
+	public abstract double getPay(Client client);
+}
+class HourlyPayCalculator extends PayCalculator{
+	private final double hourlyRate;
+	
+	public HourlyPayCalculator(double hourlyRate){
+		this.hourlyRate = hourlyRate;
+	}
+	
+	@Override
 	public double getPay(Client client){
-		return client.getHoursWorked() * HOURLY_RATE;
+		return hourlyRate * client.getHoursWorked();
 	}
 }
 
 class HrManager {
 	private ArrayList<Client> clients = new ArrayList<>();
-	private PayCalculator payCalculator = new PayCalculator();
+	private PayCalculator payCalculator;
+	
+	public HrManager(PayCalculator payCalculator){
+		this.payCalculator = payCalculator;
+	}
 	
 	public void addClient(Client client){
 		clients.add(client);
@@ -46,7 +73,9 @@ class HrManager {
 
 public class KaziSolution{
 	public static void main(String[] args){
-		HrManager hrManager = new HrManager();
+		
+		PayCalculator calculator = new HourlyPayCalculator(75);
+		HrManager hrManager = new HrManager(calculator);
 		Client client0 = new Client("Mosharraf", 45);
 		hrManager.addClient(client0);
 		
@@ -54,6 +83,9 @@ public class KaziSolution{
 		hrManager.addClient(client1);
 		
 		double totalPay = hrManager.getTotalPay();
+		
+		//System.out.println("FIXED PAY "+ hrManager.getTotalPay("FIXED"));
+		
 		System.out.println("Total pay " + totalPay);
 	}
 }
