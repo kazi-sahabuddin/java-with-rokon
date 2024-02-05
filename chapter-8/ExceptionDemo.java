@@ -6,8 +6,14 @@ public class ExceptionDemo{
 	public static void main(String[] args){
 		int a = 1;
 		int b = 0;
-		
-		int result = divide(a, b);
+		int result = 0;
+		try{
+			result = divide(a, b);
+		} catch (ArithmeticException e) {
+			System.out.println("You cannot divide " + a + " by " + b);
+			//System.out.println(e);
+		}
+		 
 		
 		System.out.println("result = "+result);
 	}
