@@ -1,6 +1,6 @@
 public class MultipleCatchDemo{
 	public static void main(String[] args){
-		try{
+		/*try{
 			int number[] = new int[10];
 			number[15] = 30/0;
 		} catch(ArithmeticException e){
@@ -10,6 +10,19 @@ public class MultipleCatchDemo{
 		} catch(ArrayIndexOutOfBoundsException e){
 			System.out.println("The index you tried to access dose not exist");
 			e.printStackTrace();
+		}*/
+		
+		try{
+			int number[] = new int[10];
+			number[15] = 30/1;
+			} catch(ArithmeticException | ArrayIndexOutOfBoundsException e){
+			if( e instanceof ArithmeticException){
+				System.out.println("You cannot divide by zero");
+				e.printStackTrace();
+			} else if( e instanceof ArrayIndexOutOfBoundsException){
+				System.out.println("The index you tried to access dose not exist");
+				e.printStackTrace();
+			}
 		}
 	}
 }
