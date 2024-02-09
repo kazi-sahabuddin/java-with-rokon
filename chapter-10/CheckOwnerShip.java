@@ -5,7 +5,7 @@ import java.nio.file.attribute.UserPrincipal;
 
 public class CheckOwnerShip{
 	public static void main(String[] args) throws IOException{
-		Path path = Path.of("/home/sahabuddin/Desktop/javaWithRokon/chapter-10/hello.txt");
+		Path path = Path.of("hello.txt");
 		UserPrincipal owner = Files.getOwner(path);
 		System.out.println("owner = "+ owner.getName());
 	}
