@@ -63,9 +63,10 @@ public class HashMapExample2{
 		Map<Person, Address> addressBook = new HashMap<>();
 		
 		Person person = new Person("Bazlur");
+		Person person1 = new Person("Bazlur");
 		Address address = new Address("500 kingston Rd","Toronto", "ON", "Canada", "M4L1V3");
 		addressBook.put(person, address);
-		System.out.println(person);
-		System.out.println(address);
+		addressBook.put(person1, address);
+		System.out.println(addressBook.size());
 	}
 }
